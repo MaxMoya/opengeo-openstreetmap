@@ -1,4 +1,4 @@
-University locations throughout the world pulled from a list, geolocated, and visualized using openstreetmap.
+Universities throughout the world pulled from a list, geolocated, and visualized using openstreetmap.
 
 To run, delete opengeo.sqlight, run geoload.py, run geodump.py, open where.html to visualize. 
 NOTE: geoload.py may take up to 5+ minutes to complete depending on your hosts capabilities. 
