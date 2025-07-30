@@ -1,4 +1,91 @@
-Universities throughout the world pulled from a list, geolocated, and visualized using openstreetmap.
+OpenStreetMap Geo API
+This repository contains a containerized Python API designed to query and interact with geographic data from OpenStreetMap. The project leverages a modern web framework and is built to be easily deployed using Docker.
 
-To run, delete opengeo.sqlight, run geoload.py, run geodump.py, open where.html to visualize. 
-NOTE: geoload.py may take up to 5+ minutes to complete depending on your hosts capabilities. 
+Key Features
+Containerized with Docker: The entire application is packaged within a Docker container, ensuring a consistent and reproducible environment.
+
+RESTful API Interface: Exposes geographic data through a clean and easy-to-use API, making it simple to integrate into other applications.
+
+OpenStreetMap Integration: Uses OpenStreetMap data as its source for geocoding, routing, or other geo-related queries.
+
+Scalable Architecture: Designed with a modular structure that allows for easy expansion and the addition of new features.
+
+Technologies Used
+Python 3
+
+A Python web framework (e.g., Flask, FastAPI)
+
+Docker
+
+OpenStreetMap data services
+
+Getting Started
+Prerequisites
+Before you begin, ensure you have Docker installed on your system.
+
+Installation and Running the API
+Clone this repository to your local machine:
+
+Bash
+
+git clone https://github.com/MaxMoya/opengeo-openstreetmap.git
+cd opengeo-openstreetmap
+Build the Docker image:
+
+Bash
+
+docker build -t opengeo-api .
+Run the container. This will start the API and map the container's port (e.g., 8000) to a local port.
+
+Bash
+
+docker run -d -p 8000:8000 --name opengeo-container opengeo-api
+-d: Runs the container in detached mode (in the background).
+
+-p 8000:8000: Maps port 8000 on your local machine to port 8000 inside the container.
+
+--name opengeo-container: Gives the container a memorable name.
+
+The API should now be running and accessible at http://localhost:8000.
+
+API Endpoints
+The API provides several endpoints for interacting with geographic data. Here is a plausible example of the kind of endpoints you can expect:
+
+Method	Endpoint	Description
+GET	/api/v1/geocode	Geocodes an address or place name to coordinates.
+GET	/api/v1/reverse-geocode	Reverse geocodes coordinates to a street address.
+GET	/api/v1/search	Searches for points of interest (e.g., parks, restaurants) within a specified area.
+
+Export to Sheets
+Example: Geocoding a location
+
+You can make a GET request to the geocode endpoint with a location parameter.
+
+Request:
+
+GET http://localhost:8000/api/v1/geocode?location=Eiffel%20Tower,%20Paris
+Example Response:
+
+JSON
+
+{
+  "location": "Eiffel Tower, Paris",
+  "latitude": 48.8584,
+  "longitude": 2.2945,
+  "address": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France"
+}
+Project Structure
+app.py: The main entry point for the web application, responsible for initializing the API.
+
+opengeo_api.py: Contains the core logic for handling geocoding and other geographic data processing.
+
+Dockerfile: Specifies the environment and instructions for building the Docker image.
+
+Potential Use Cases
+Building a custom geocoding or search service.
+
+Integrating geographic data into web or mobile applications.
+
+Data analysis on OpenStreetMap datasets.
+
+Developing a routing or mapping application.
